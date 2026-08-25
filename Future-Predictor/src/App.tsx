@@ -43,21 +43,33 @@ function App() {
 
   return (
     <div className="container">
-      <h1>🔮 Future Predictor</h1>
-      
+      <div className="brand">
+        <span className="brand-eyebrow">Bhoomi House</span>
+        <div className="brand-mark">
+          <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="11" cy="11" r="9.5" stroke="#c9a24d" strokeWidth="1.2" />
+            <circle cx="11" cy="11" r="4.5" fill="#b6532e" fillOpacity="0.35" />
+          </svg>
+        </div>
+        <div className="brand-divider" />
+      </div>
+
+      <h1>Future Predictor</h1>
+      <p className="subtitle">Tell us your name, and let the house read what's ahead.</p>
+
       {!prediction ? (
         <form onSubmit={generateFuture} className="form-card">
-          <label htmlFor="nameInput">Enter your name:</label>
+          <label htmlFor="nameInput">Your name</label>
           <input
             id="nameInput"
             type="text"
-            placeholder="Your Name"
+            placeholder="Enter your name"
             value={name}
             onChange={(e) => setName(e.target.value)}
             required
           />
           <button type="submit" disabled={loading}>
-            {loading ? 'Consulting the stars...' : 'Predict My Future'}
+            {loading ? 'Consulting the stars…' : 'Reveal My Future'}
           </button>
         </form>
       ) : (
@@ -69,6 +81,8 @@ function App() {
           </button>
         </div>
       )}
+
+      <span className="footer-tag">Bhoomi House &middot; Grounded Predictions</span>
     </div>
   )
 }

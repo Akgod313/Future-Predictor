@@ -1,8 +1,28 @@
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,600;1,9..144,500&family=Inter:wght@400;500;600;700&display=swap');
+
+:root {
+  --bg: #1a130e;
+  --bg-glow: #2a1c12;
+  --card: #241a13;
+  --card-border: #3c2c1f;
+  --input-bg: #1e1610;
+  --accent: #b6532e;
+  --accent-hover: #9c4526;
+  --gold: #c9a24d;
+  --text: #f3e9dc;
+  --text-muted: #a99781;
+  --text-faint: #7a6b58;
+}
+
+* {
+  box-sizing: border-box;
+}
+
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-  background-color: #1a1a2e;
-  color: #eaeaea;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  background-color: var(--bg);
+  color: var(--text);
 }
 
 .container {
@@ -11,42 +31,205 @@ body {
   align-items: center;
   justify-content: center;
   min-height: 100vh;
-  padding: 20px;
+  padding: 32px 20px;
   text-align: center;
+  position: relative;
+  overflow: hidden;
+  background:
+    radial-gradient(ellipse 700px 500px at 50% 8%, var(--bg-glow) 0%, transparent 65%),
+    var(--bg);
 }
 
-.form-card, .prediction-card {
-  background: #16213e;
-  padding: 30px 20px;
-  border-radius: 12px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
-  width: 100%;
-  max-width: 400px; /* Keeps it looking like a mobile app even on desktop */
+/* ---- Brand mark ---- */
+.brand {
   display: flex;
   flex-direction: column;
-  gap: 15px;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 34px;
+}
+
+.brand-eyebrow {
+  font-family: 'Inter', sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+
+.brand-mark {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.brand-mark svg {
+  flex-shrink: 0;
+}
+
+.brand-name {
+  font-family: 'Fraunces', serif;
+  font-weight: 500;
+  font-size: 30px;
+  letter-spacing: 0.01em;
+  color: var(--text);
+}
+
+.brand-divider {
+  width: 56px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--card-border), transparent);
+  margin-top: 10px;
+  position: relative;
+}
+
+.brand-divider::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 5px;
+  height: 5px;
+  background: var(--gold);
+  transform: translate(-50%, -50%) rotate(45deg);
+}
+
+/* ---- Heading ---- */
+h1 {
+  font-family: 'Fraunces', serif;
+  font-style: italic;
+  font-weight: 500;
+  font-size: 34px;
+  line-height: 1.15;
+  margin: 0 0 6px;
+  color: var(--text);
+}
+
+.subtitle {
+  font-size: 14px;
+  color: var(--text-muted);
+  margin: 0 0 32px;
+  max-width: 320px;
+  line-height: 1.5;
+}
+
+/* ---- Cards ---- */
+.form-card, .prediction-card {
+  background: var(--card);
+  border: 1px solid var(--card-border);
+  padding: 36px 28px;
+  border-radius: 16px;
+  box-shadow: 0 20px 50px -12px rgba(0, 0, 0, 0.55);
+  width: 100%;
+  max-width: 380px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  position: relative;
+}
+
+.form-card::before, .prediction-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 24px;
+  right: 24px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  opacity: 0.6;
+}
+
+label {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-faint);
+  text-align: left;
+  margin-bottom: -6px;
 }
 
 input {
-  padding: 12px;
-  border-radius: 8px;
-  border: 1px solid #0f3460;
-  background: #0f3460;
-  color: white;
-  font-size: 16px;
+  padding: 13px 14px;
+  border-radius: 9px;
+  border: 1px solid var(--card-border);
+  background: var(--input-bg);
+  color: var(--text);
+  font-family: 'Inter', sans-serif;
+  font-size: 15px;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+input::placeholder {
+  color: var(--text-faint);
+}
+
+input:focus {
+  outline: none;
+  border-color: var(--gold);
+  box-shadow: 0 0 0 3px rgba(201, 162, 77, 0.18);
 }
 
 button {
   padding: 14px;
-  border-radius: 8px;
+  border-radius: 9px;
   border: none;
-  background: #e94560;
-  color: white;
-  font-size: 16px;
-  font-weight: bold;
+  background: var(--accent);
+  color: var(--text);
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.03em;
   cursor: pointer;
+  transition: background 0.15s ease, transform 0.1s ease;
+}
+
+button:hover:not(:disabled) {
+  background: var(--accent-hover);
+}
+
+button:active:not(:disabled) {
+  transform: translateY(1px);
 }
 
 button:disabled {
-  opacity: 0.7;
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+button:focus-visible, input:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 2px;
+}
+
+/* ---- Prediction result ---- */
+.prediction-card h2 {
+  font-family: 'Fraunces', serif;
+  font-weight: 500;
+  font-size: 22px;
+  margin: 0;
+  color: var(--text);
+}
+
+.prediction-card p {
+  font-size: 15.5px;
+  line-height: 1.65;
+  color: var(--text-muted);
+  margin: 0;
+}
+
+/* ---- Footer ---- */
+.footer-tag {
+  margin-top: 28px;
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text-faint);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    transition: none !important;
+  }
 }
