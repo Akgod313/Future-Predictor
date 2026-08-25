@@ -2,9 +2,46 @@ import { useState } from 'react'
 import { supabase } from './lib/supabase'
 import './App.css'
 
-const careers = ["a world-renowned chef", "a deep-sea explorer", "a tech startup founder", "a bestselling author"];
-const locations = ["in a bustling cyberpunk city", "on a quiet farm in Italy", "in a high-tech Mars colony", "on a tropical island"];
-const twists = ["where you secretly fight crime on weekends.", "and you own a pet capybara.", "but you still can't fold a fitted sheet.", "where you invent a new type of coffee."];
+const careers = [
+  "a world-renowned chef", "a deep-sea explorer", "a tech startup founder", "a bestselling author",
+  "a self-taught architect", "an underground DJ", "a professional treasure hunter", "a beekeeping influencer",
+  "a Formula 1 strategist", "a puppet-maker for stop-motion films", "a rogue weather forecaster",
+  "a competitive dumpling chef", "a wildlife photographer", "a stand-up comedian turned therapist",
+];
+
+const locations = [
+  "in a bustling cyberpunk city", "on a quiet farm in Italy", "in a high-tech Mars colony", "on a tropical island",
+  "in a converted lighthouse", "aboard a slow train that never stops", "in a treehouse village in Costa Rica",
+  "in a neon-lit night market", "on a research base in Antarctica", "in a city built inside a canyon",
+  "on a houseboat in Amsterdam", "in a mountain town that only exists in fog",
+];
+
+const companions = [
+  "with a rescued three-legged dog by your side", "alongside a business partner you met in a lift",
+  "with a robot assistant that has strong opinions", "with a rotating cast of eccentric neighbors",
+  "with your childhood best friend as your right hand", "with a talking parrot who handles your schedule",
+  "solo, exactly the way you like it", "with a mentor who turns out to be a former rival",
+];
+
+const quirks = [
+  "but you still can't fold a fitted sheet", "and you've developed a mild addiction to spicy pickles",
+  "though you refuse to use punctuation in texts", "and you've started collecting vintage doorknobs",
+  "but you're terrified of your own doorbell", "and you narrate your life in a nature-documentary voice",
+  "though you've never once been on time", "and you insist on doing everything left-handed now",
+];
+
+const twists = [
+  "where you secretly fight crime on weekends", "and you own a pet capybara",
+  "where you invent a new type of coffee", "and a chance encounter changes everything overnight",
+  "where you accidentally become internet-famous", "and you're one lucky break from a total career pivot",
+  "where a rumor about you turns out to be true", "and you finally learn the thing you've been avoiding",
+];
+
+const achievements = [
+  "You'll win an award nobody expected you to.", "A stranger will thank you for something small you forgot doing.",
+  "You'll finally finish that project you keep putting off.", "Someone will ask you to write a book about it.",
+  "You'll teach a class on the thing you're worst at today.", "A version of your childhood dream will come true, sideways.",
+];
 
 function App() {
   const [name, setName] = useState('');
@@ -17,11 +54,18 @@ function App() {
 
     setLoading(true);
 
-    // 1. Generate the random future
-    const career = careers[Math.floor(Math.random() * careers.length)];
-    const location = locations[Math.floor(Math.random() * locations.length)];
-    const twist = twists[Math.floor(Math.random() * twists.length)];
-    const futureText = `In 10 years you will be ${career} living ${location}, ${twist}`;
+    // 1. Generate the random future — pull one item from each category so
+    // the result stays fresh across many more possible combinations
+    const pick = (arr: string[]) => arr[Math.floor(Math.random() * arr.length)];
+
+    const career = pick(careers);
+    const location = pick(locations);
+    const companion = pick(companions);
+    const quirk = pick(quirks);
+    const twist = pick(twists);
+    const achievement = pick(achievements);
+
+    const futureText = `In 10 years you will be ${career} living ${location}, ${companion}. It'll happen ${twist}, ${quirk}. ${achievement}`;
 
     // 2. Save to Supabase
     const { error } = await supabase
